@@ -1,7 +1,6 @@
 import {
   GoogleIcon,
   GithubIcon,
-  XIcon,
   DiscordIcon,
 } from "./components/social-auth.icon";
 import { IconType, SupportedOauthProviders } from "./type";
@@ -12,7 +11,6 @@ export const ERROR_CALLBACK_URL = "/auth/signin";
 export const SUPPORTED_OAUTH_PROVIDERS = [
   "google",
   "github",
-  "twitter",
   "discord",
 ] as const;
 
@@ -39,12 +37,6 @@ export const SUPPORTED_OAUTH_PROVIDERS_DETAILS: Record<
     name: "Discord",
     Icon: DiscordIcon,
     style: "bg-indigo-700 hover:bg-indigo-700 hover:opacity-95 dark:text-white",
-  },
-  twitter: {
-    name: "X",
-    Icon: XIcon,
-    IconStyle: "size-8",
-    style: "bg-white border text-black hover:bg-slate-50 hover:opacity-95",
   },
 };
 

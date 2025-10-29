@@ -1010,3 +1010,69 @@ params: m3sh1OFDYGlaEcCulujHtv3L93oVWaEK,Lxf7sGCXP0E3pb7nAEWsKiuMyIZUrz5J,{"call
  [37m[1m [22m[39m Reload env: .env.local
 [dotenv@17.2.3] injecting env (2) from ../../.env.local [2m-- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops[0m
  GET /home [32m200[39m in 554ms[2m (compile: 288ms, render: 266ms)[22m
+ [32m[1m✓[22m[39m Compiled in 39ms
+ [32m[1m✓[22m[39m Compiled in 31ms
+ [32m[1m✓[22m[39m Compiled in 37ms
+ [32m[1m✓[22m[39m Compiled in 39ms
+[dotenv@17.2.3] injecting env (0) from ../../.env.local [2m-- tip: ⚙️  override existing env vars with { override: true }[0m
+ [32m[1m✓[22m[39m Compiled in 36ms
+ [31m[1m⨯[22m[39m ReferenceError: DiscordIcon is not defined
+    at module evaluation (src/features/auth/constant.ts:37:11)
+    at module evaluation (src/features/auth/client.ts:6:1)
+    at module evaluation (src/features/auth/components/sign-out.button.tsx:4:1)
+[0m [90m 35 |[39m   discord[33m:[39m {
+ [90m 36 |[39m     name[33m:[39m [32m"Discord"[39m[33m,[39m
+[31m[1m>[22m[39m[90m 37 |[39m     [33mIcon[39m[33m:[39m [33mDiscordIcon[39m[33m,[39m
+ [90m    |[39m           [31m[1m^[22m[39m
+ [90m 38 |[39m     style[33m:[39m [32m"bg-indigo-700 hover:bg-indigo-700 hover:opacity-95 dark:text-white"[39m[33m,[39m
+ [90m 39 |[39m   }[33m,[39m
+ [90m 40 |[39m }[33m;[39m[0m {
+  digest: [32m'1707474807'[39m
+}
+ GET /home [31m500[39m in 1124ms[2m (compile: 247ms, render: 877ms)[22m
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload when ./apps/web/src/features/auth/constant.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+[dotenv@17.2.3] injecting env (0) from ../../.env.local [2m-- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com[0m
+ [32m[1m✓[22m[39m Compiled in 41ms
+ GET /home [32m200[39m in 412ms[2m (compile: 180ms, render: 232ms)[22m
+ [37m[1m [22m[39m Reload env: .env.local
+[dotenv@17.2.3] injecting env (2) from ../../.env.local [2m-- tip: ⚙️  enable debug logging with { debug: true }[0m
+ GET /home [32m200[39m in 617ms[2m (compile: 306ms, render: 311ms)[22m
+ [37m[1m [22m[39m Reload env: .env.local
+[dotenv@17.2.3] injecting env (2) from ../../.env.local [2m-- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops[0m
+ GET /home [32m200[39m in 559ms[2m (compile: 284ms, render: 275ms)[22m
+ [37m[1m [22m[39m Reload env: .env.local
+[dotenv@17.2.3] injecting env (2) from ../../.env.local [2m-- tip: ⚙️  suppress all logs with { quiet: true }[0m
+[2m2025-10-29T13:05:38.167Z[0m [33mWARN[0m [1m[Better Auth]:[0m Social provider twitter is missing clientId or clientSecret
+ GET /home [32m200[39m in 569ms[2m (compile: 290ms, render: 279ms)[22m
+ [37m[1m [22m[39m Reload env: .env.local
+[dotenv@17.2.3] injecting env (2) from ../../.env.local [2m-- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops[0m
+[2m2025-10-29T13:07:18.967Z[0m [33mWARN[0m [1m[Better Auth]:[0m Social provider twitter is missing clientId or clientSecret
+ GET /home [32m200[39m in 585ms[2m (compile: 291ms, render: 294ms)[22m
+ [37m[1m [22m[39m Reload env: .env.local
+[dotenv@17.2.3] injecting env (2) from ../../.env.local [2m-- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit[0m
+[2m2025-10-29T13:07:23.444Z[0m [33mWARN[0m [1m[Better Auth]:[0m Social provider twitter is missing clientId or clientSecret
+ GET /home [32m200[39m in 598ms[2m (compile: 281ms, render: 317ms)[22m
+[dotenv@17.2.3] injecting env (0) from ../../.env.local [2m-- tip: 📡 add observability to secrets: https://dotenvx.com/ops[0m
+[2m2025-10-29T13:07:32.232Z[0m [33mWARN[0m [1m[Better Auth]:[0m Social provider twitter is missing clientId or clientSecret
+ POST /api/auth/sign-out [32m200[39m in 1306ms[2m (compile: 437ms, render: 868ms)[22m
+[dotenv@17.2.3] injecting env (0) from ../../.env.local [2m-- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit[0m
+[2m2025-10-29T13:07:33.640Z[0m [33mWARN[0m [1m[Better Auth]:[0m Social provider twitter is missing clientId or clientSecret
+[dotenv@17.2.3] injecting env (0) from ../../.env.local -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
+[2m2025-10-29T13:07:33.442Z[0m [33mWARN[0m [1m[Better Auth]:[0m Social provider twitter is missing clientId or clientSecret
+ GET / [32m200[39m in 507ms[2m (compile: 267ms, render: 241ms)[22m
+ GET /auth/sign-in [32m200[39m in 178ms[2m (compile: 131ms, render: 47ms)[22m
+ GET /auth/sign-up [32m200[39m in 569ms[2m (compile: 539ms, render: 30ms)[22m
+[dotenv@17.2.3] injecting env (0) from ../../.env.local -- tip: ⚙️  suppress all logs with { quiet: true }
+[2m2025-10-29T13:08:11.962Z[0m [33mWARN[0m [1m[Better Auth]:[0m Social provider twitter is missing clientId or clientSecret
+ POST /api/auth/sign-in/social [32m200[39m in 1200ms[2m (compile: 76ms, render: 1124ms)[22m
+[dotenv@17.2.3] injecting env (0) from ../../.env.local -- tip: ⚙️  override existing env vars with { override: true }
+[2m2025-10-29T13:08:25.456Z[0m [33mWARN[0m [1m[Better Auth]:[0m Social provider twitter is missing clientId or clientSecret
+[2m2025-10-29T13:08:26.748Z[0m [33mWARN[0m [1m[Better Auth]:[0m [Drizzle Adapter] - Transactions are not supported. Executing operations sequentially.
+ GET /api/auth/callback/google?state=KZIbNJsZQN8W5HBbqzDSRAJYSQeHAMfk&code=4%2F0Ab32j92JIFb9IR19HXBQwnYf6fBgxcvQBonISYNrS-aIBa0zcFSNJN_DYOeKGmNKdULo8A&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=1&prompt=consent [34m302[39m in 2.8s[2m (compile: 62ms, render: 2.7s)[22m
+ GET /home [32m200[39m in 170ms[2m (compile: 4ms, render: 167ms)[22m
+ GET /home [32m200[39m in 84ms[2m (compile: 4ms, render: 79ms)[22m
+ GET / [32m200[39m in 199ms[2m (compile: 3ms, render: 196ms)[22m
+ GET /reclara [33m404[39m in 587ms[2m (compile: 473ms, render: 114ms)[22m
+ GET / [32m200[39m in 84ms[2m (compile: 3ms, render: 81ms)[22m
