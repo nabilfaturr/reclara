@@ -11,7 +11,7 @@ export async function sendVideoURL(formData: FormData): Promise<boolean> {
     console.log("Selected model:", model);
 
     // TODO: check if videoUrl is valid
-    // TODO: check if videoUrl is already summarized with the same model and return the summary if it is
+    
     // TODO: send the videoUrl to the worker
 
     await new Promise((resolve) => setTimeout(resolve, 2000));

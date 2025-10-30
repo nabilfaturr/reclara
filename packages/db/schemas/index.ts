@@ -1,3 +1,4 @@
 import * as authSchema from "./auth.schema";
+import * as summarySchema from "./summary.schema";
 
-export { authSchema };
+export { authSchema, summarySchema };

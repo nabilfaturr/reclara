@@ -8,8 +8,6 @@ type AuthProviderProps = {
 export async function AuthProvider({ children }: AuthProviderProps) {
   const session = await getSession();
 
-  console.log({ session });
-
   if (!session) return redirect("/auth/sign-in");
 
   return <>{children}</>;
