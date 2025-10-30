@@ -39,3 +39,7 @@ export const summary = sqliteTable("summary", {
     .$onUpdate(() => new Date())
     .notNull(),
 });
+
+export type Summary = typeof summary.$inferSelect;
+export type NewSummary = typeof summary.$inferInsert;
+

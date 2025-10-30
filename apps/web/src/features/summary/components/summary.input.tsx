@@ -4,28 +4,10 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ModelMenu } from "./model.menu";
-import { DEFAULT_LLM_MODEL, SUPPORTED_LLM_MODELS } from "@constants";
-import { youtubeShortRegex, youtubeUrlRegex } from "../constant";
+import { DEFAULT_LLM_MODEL } from "@constants";
 import { sendVideoURL } from "../actions";
-import { z } from "zod";
 import { toast } from "sonner";
-
-const formSchema = z.object({
-  videoUrl: z
-    .string()
-    .trim()
-    .refine(
-      (val) =>
-        youtubeUrlRegex.test(val) ||
-        val.startsWith("youtube.com/watch?v=") ||
-        val.startsWith("www.youtube.com/watch?v=") ||
-        youtubeShortRegex.test(val),
-      {
-        message: "Invalid YouTube URL or ID",
-      }
-    ),
-  model: z.enum([...SUPPORTED_LLM_MODELS]),
-});
+import { formSchema } from "../validation";
 
 const placeholder = `Input Youtube video URL or ID here`;
 
