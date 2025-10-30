@@ -13,7 +13,7 @@ export const SUPPORTED_LLM_MODELS_DETAILS: Record<
     description: "Open-source large language model.",
   },
   "llama4-maverick-instruct-basic": {
-    name: "LLaMA 4 Maverick",
+    name: "LLama 4 Maverick",
     description: "Basic instruction-following model.",
   },
   "qwen3-embedding-8b": {

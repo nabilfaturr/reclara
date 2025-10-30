@@ -13,15 +13,19 @@ import React from "react";
 
 type ModelMenuProps = {
   triggerClassName?: string;
-  setSelectedModel: (model: typeof DEFAULT_LLM_MODEL) => void;
-  selectedModel: typeof DEFAULT_LLM_MODEL;
+  form: {
+    videoUrl: string;
+    model: typeof DEFAULT_LLM_MODEL;
+  };
+  setForm: React.Dispatch<
+    React.SetStateAction<{
+      videoUrl: string;
+      model: typeof DEFAULT_LLM_MODEL;
+    }>
+  >;
 };
 
-export function ModelMenu({
-  triggerClassName,
-  setSelectedModel,
-  selectedModel,
-}: ModelMenuProps) {
+export function ModelMenu({ setForm, form, triggerClassName }: ModelMenuProps) {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -30,7 +34,7 @@ export function ModelMenu({
         <Button
           variant="outline"
           onClick={() => setOpen(!open)}
-          className="bg-muted cursor-pointer shadow-none  text-foreground h-7 text-sm"
+          className="bg-muted cursor-pointer shadow-none  text-foreground h-7 text-xs"
           size="sm"
         >
           <ChevronDown
@@ -38,7 +42,7 @@ export function ModelMenu({
               open ? "rotate-0" : "rotate-180"
             }`}
           />
-          {SUPPORTED_LLM_MODELS_DETAILS[selectedModel].name}
+          {SUPPORTED_LLM_MODELS_DETAILS[form.model].name}
           <span className="sr-only">Select model</span>
         </Button>
       </DropdownMenuTrigger>
@@ -46,9 +50,12 @@ export function ModelMenu({
         {Object.entries(SUPPORTED_LLM_MODELS_DETAILS).map(([key, model]) => (
           <DropdownMenuCheckboxItem
             className="font-sans cursor-pointer"
-            checked={key === selectedModel}
+            checked={key === form.model}
             onCheckedChange={() =>
-              setSelectedModel(key as typeof DEFAULT_LLM_MODEL)
+              setForm((prev) => ({
+                ...prev,
+                model: key as typeof DEFAULT_LLM_MODEL,
+              }))
             }
             key={key}
           >
@@ -60,16 +67,6 @@ export function ModelMenu({
             </p>
           </DropdownMenuCheckboxItem>
         ))}
-        {/* {SUPPORTED_LLM_MODELS_DETAILS.map((model) => (
-          <DropdownMenuCheckboxItem
-            className="font-sans cursor-pointer"
-            checked={model.name === selectedModel}
-            onCheckedChange={() => setSelectedModel(model.name)}
-            key={model.name}
-          >
-            {model}
-          </DropdownMenuCheckboxItem>
-        ))} */}
       </DropdownMenuContent>
     </DropdownMenu>
   );

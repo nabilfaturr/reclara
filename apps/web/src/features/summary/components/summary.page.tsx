@@ -5,31 +5,31 @@ import { SummaryInput } from "@/features/summary/components/summary.input";
 import { DEFAULT_LLM_MODEL } from "@constants";
 
 export function SummaryPage() {
-  const [selectedModel, setSelectedModel] = React.useState(DEFAULT_LLM_MODEL);
+  const [form, setForm] = React.useState<{
+    videoUrl: string;
+    model: typeof DEFAULT_LLM_MODEL;
+  }>({
+    videoUrl: "",
+    model: DEFAULT_LLM_MODEL,
+  });
 
   return (
     <>
       <SummaryResult />
-      <SummaryInput
-        selectedModel={selectedModel}
-        setSelectedModel={setSelectedModel}
-      />
+      <SummaryInput form={form} setForm={setForm} />
     </>
   );
 }
 
 export function SummaryResult() {
   return (
-    <div className="w-full max-w-2xl flex justify-center items-center">
-      {/* <iframe
-        width="95%"
-        height="300"
-        className="rounded-lg"
-        src="https://www.youtube.com/embed/pHK2UxwfaL0?si=_F-Eh_KCAFcOj-jt"
-        title="YouTube video player"
-        allowFullScreen
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      ></iframe> */}
+    <div className="borderr h-full px-2 pt-24">
+      <div className="borderg h-full">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore dicta
+        possimus unde hic rem non dignissimos iusto illo error et. Saepe
+        architecto soluta maiores expedita tempora, porro cupiditate explicabo
+        ipsum!
+      </div>
     </div>
   );
 }
