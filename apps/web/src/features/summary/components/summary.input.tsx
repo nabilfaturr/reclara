@@ -4,8 +4,28 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ModelMenu } from "./model.menu";
-import { DEFAULT_LLM_MODEL } from "@constants";
+import { DEFAULT_LLM_MODEL, SUPPORTED_LLM_MODELS } from "@constants";
+import { youtubeShortRegex, youtubeUrlRegex } from "../constant";
 import { sendVideoURL } from "../actions";
+import { z } from "zod";
+import { toast } from "sonner";
+
+const formSchema = z.object({
+  videoUrl: z
+    .string()
+    .trim()
+    .refine(
+      (val) =>
+        youtubeUrlRegex.test(val) ||
+        val.startsWith("youtube.com/watch?v=") ||
+        val.startsWith("www.youtube.com/watch?v=") ||
+        youtubeShortRegex.test(val),
+      {
+        message: "Invalid YouTube URL or ID",
+      }
+    ),
+  model: z.enum([...SUPPORTED_LLM_MODELS]),
+});
 
 const placeholder = `Input Youtube video URL or ID here`;
 
@@ -27,6 +47,14 @@ export function SummaryInput({ form, setForm }: SummaryInputProps) {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const parsed = formSchema.safeParse(form);
+
+    if (!parsed.success) {
+      return toast.error(parsed.error.issues[0]?.message || "Invalid input", {
+        className: "mt-24",
+      });
+    }
 
     const formData = new FormData();
     formData.append("videoUrl", form.videoUrl);

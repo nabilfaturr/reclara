@@ -23,8 +23,8 @@ export function SummaryPage() {
 
 export function SummaryResult() {
   return (
-    <div className="borderr h-full px-2 pt-24">
-      <div className="borderg h-full">
+    <div className="h-full px-2 pt-24">
+      <div className="h-full">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore dicta
         possimus unde hic rem non dignissimos iusto illo error et. Saepe
         architecto soluta maiores expedita tempora, porro cupiditate explicabo

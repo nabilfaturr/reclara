@@ -3,6 +3,7 @@ import { Heading } from "@/components/shared/heading";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./theme.toggle";
+import { Toaster } from "sonner";
 
 type LayoutProviderProps = {
   children: React.ReactNode;
@@ -32,6 +33,7 @@ export function LayoutProvider({ children, className }: LayoutProviderProps) {
       >
         {children}
       </main>
+      <Toaster position="top-center" className="font-sans" richColors />
     </div>
   );
 }
