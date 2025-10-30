@@ -12,6 +12,7 @@
     "db:migrate": "bunx drizzle-kit migrate --config ../../packages/db/drizzle.config.ts"
   },
   "dependencies": {
+    "@constants": "workspace:*",
     "@db": "workspace:*",
     "@libsql/client": "^0.15.15",
     "@radix-ui/react-dropdown-menu": "^2.1.16",

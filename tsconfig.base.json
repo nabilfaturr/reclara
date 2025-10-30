@@ -5,7 +5,8 @@
       "@/*": ["apps/web/src/*"],
       "@db/*": ["packages/db/*"],
       "@auth/*": ["packages/auth/*"],
-      "@utils/*": ["packages/utils/*"]
+      "@utils/*": ["packages/utils/*"],
+      "@constants/*": ["packages/constants/*"]
     }
   }
 }

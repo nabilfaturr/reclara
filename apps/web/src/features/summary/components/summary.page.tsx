@@ -1,25 +1,27 @@
-import { LayoutProvider } from "@/components/shared/layout.provider";
-import { SummaryInput } from "./summary.input";
-import { AuthProvider, getSession } from "@/features/auth";
-import { Session } from "@/components/shared/session.card";
+"use client";
 
-export async function SummaryPage() {
-  const session = await getSession();
+import React from "react";
+import { SummaryInput } from "@/features/summary/components/summary.input";
+import { DEFAULT_LLM_MODEL } from "@constants";
+
+export function SummaryPage() {
+  const [selectedModel, setSelectedModel] = React.useState(DEFAULT_LLM_MODEL);
 
   return (
-    <AuthProvider>
-      <LayoutProvider className="flex-col absolute inset-0">
-        <SummaryResult />
-        <SummaryInput />
-      </LayoutProvider>
-    </AuthProvider>
+    <>
+      <SummaryResult />
+      <SummaryInput
+        selectedModel={selectedModel}
+        setSelectedModel={setSelectedModel}
+      />
+    </>
   );
 }
 
 export function SummaryResult() {
   return (
-    <div className="w-full max-w-2xl flex justify-center items-center flex-1">
-      <iframe
+    <div className="w-full max-w-2xl flex justify-center items-center">
+      {/* <iframe
         width="95%"
         height="300"
         className="rounded-lg"
@@ -27,7 +29,7 @@ export function SummaryResult() {
         title="YouTube video player"
         allowFullScreen
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      ></iframe>
+      ></iframe> */}
     </div>
   );
 }
