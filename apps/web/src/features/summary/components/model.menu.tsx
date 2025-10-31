@@ -7,7 +7,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuCheckboxItem,
 } from "@/components/ui/dropdown-menu";
-import { DEFAULT_LLM_MODEL, SUPPORTED_LLM_MODELS_DETAILS } from "@constants";
+import { DEFAULT_LLM_MODEL, SUPPORTED_LLM_MODELS_DETAILS } from "@reclara/constants";
 import { ChevronDown } from "lucide-react";
 import React from "react";
 

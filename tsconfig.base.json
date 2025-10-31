@@ -3,10 +3,12 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["apps/web/src/*"],
-      "@db/*": ["packages/db/*"],
-      "@auth/*": ["packages/auth/*"],
-      "@utils/*": ["packages/utils/*"],
-      "@constants/*": ["packages/constants/*"]
+      "@reclara/db/*": ["packages/db/*"],
+      "@reclara/db": ["packages/db/index.ts"],
+      "@reclara/auth/*": ["packages/auth/*"],
+      "@reclara/utils/*": ["packages/utils/*"],
+      "@reclara/constants": ["packages/constants/index.ts"],
+      "@reclara/constants/*": ["packages/constants/*"]
     }
   }
 }

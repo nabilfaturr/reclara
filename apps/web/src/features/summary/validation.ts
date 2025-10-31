@@ -1,4 +1,4 @@
-import { SUPPORTED_LLM_MODELS } from "@constants";
+import { SUPPORTED_LLM_MODELS } from "@reclara/constants";
 import z from "zod";
 import { youtubeUrlRegex, youtubeShortRegex } from "./constant";
 
@@ -7,7 +7,7 @@ export const formSchema = z.object({
     .string()
     .trim()
     .refine(
-      (val) =>
+      (val: string) =>
         youtubeUrlRegex.test(val) ||
         val.startsWith("youtube.com/watch?v=") ||
         val.startsWith("www.youtube.com/watch?v=") ||

@@ -1,5 +1,5 @@
 import { getSession } from "@/features/auth";
-import { getSummary } from "@db/queries/summary.query";
+import { getSummary } from "@reclara/db/queries/summary.query";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req: NextRequest) => {

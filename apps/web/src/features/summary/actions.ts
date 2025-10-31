@@ -1,10 +1,10 @@
 "use server";
 
-import { createSummary } from "@db";
+import { createSummary } from "@reclara/db";
 import { formSchema } from "./validation";
 import { getSession } from "@/features/auth";
 import { extractVideoIdFromUrl } from "./utils";
-import { Summary } from "@db/schemas/summary.schema";
+import { Summary } from "@reclara/db/schemas/summary.schema";
 
 export async function sendVideoURL(
   formData: FormData
