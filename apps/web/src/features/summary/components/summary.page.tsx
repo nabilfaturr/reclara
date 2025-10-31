@@ -8,9 +8,9 @@ import { Summary } from "@db/schemas/summary.schema";
 
 export function SummaryPage() {
   const [summary, setSummary] = React.useState<Summary | null>(null);
-  const hasStartedRef = React.useRef(false); // 🔥 prevent multiple starts
+  const hasStartedRef = React.useRef(false);
 
-  const { data, loading, start, stop, active } = useControlledFetch<Summary>(
+  const { data, loading, start } = useControlledFetch<Summary>(
     summary ? `/api/summary?id=${summary.id}` : undefined,
     {
       autoStop: (data) => data.state === "finished",
@@ -22,7 +22,6 @@ export function SummaryPage() {
     model: DEFAULT_LLM_MODEL,
   });
 
-  // 🔹 auto-start polling ONCE ketika summary baru dibuat
   React.useEffect(() => {
     if (summary?.id && !hasStartedRef.current) {
       console.log("🚀 Starting polling for summary:", summary.id);
@@ -31,18 +30,15 @@ export function SummaryPage() {
     }
   }, [summary?.id, start]);
 
-  // 🔹 update summary setiap data berubah (tapi jangan trigger re-start)
   React.useEffect(() => {
     if (data) {
       setSummary((prev) => {
-        // 🔥 hanya update kalau ada perubahan actual
         if (JSON.stringify(prev) === JSON.stringify(data)) return prev;
         return data;
       });
     }
   }, [data]);
 
-  // 🔹 reset hasStartedRef ketika summary id berubah (new summary)
   React.useEffect(() => {
     if (!summary?.id) {
       hasStartedRef.current = false;
@@ -71,11 +67,11 @@ function SummaryResult({
 }) {
   return (
     <div className="h-full px-2 pt-24">
-      {loading && <p>⏳ Loading summary...</p>}
+      {loading && <p>Loading summary...</p>}
       {summary ? (
         <div>
-          <p>🎬 ID: {summary.id}</p>
-          <p>📡 State: {summary.state}</p>
+          <p>ID: {summary.id}</p>
+          <p>State: {summary.state}</p>
           {summary.summarize && <p>{summary.summarize}</p>}
         </div>
       ) : (
