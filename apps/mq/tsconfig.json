@@ -1,0 +1,47 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    // Bun runtime settings
+    "target": "esnext",
+    "module": "esnext",
+    "lib": ["ESNext"],
+    "moduleResolution": "bundler",
+    "moduleDetection": "force",
+
+    // Bun supports these features natively
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+
+    // Path aliases (extends base, override local)
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@reclara/db/*": ["../../packages/db/*"],
+      "@reclara/db": ["../../packages/db/index.ts"],
+      "@reclara/auth/*": ["../../packages/auth/*"],
+      "@reclara/utils/*": ["../../packages/utils/*"],
+      "@reclara/constants": ["../../packages/constants/index.ts"],
+      "@reclara/constants/*": ["../../packages/constants/*"]
+    },
+
+    // Best practices
+    "strict": true,
+    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "forceConsistentCasingInFileNames": true,
+
+    // Stricter flags (disabled for flexibility)
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noPropertyAccessFromIndexSignature": false
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
