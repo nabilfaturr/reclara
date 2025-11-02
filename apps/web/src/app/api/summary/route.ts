@@ -21,14 +21,10 @@ export const GET = async (req: NextRequest) => {
       );
     }
 
-    console.log("Fetching summary for id:", id, "and userId:", user.id);
-
     const response = await getSummary({
       id: id,
       userId: user.id,
     });
-
-    console.log("Fetched summary:", response);
 
     return NextResponse.json({ data: response }, { status: 200 });
   } catch (error) {

@@ -54,3 +54,19 @@ export const getSummary = async ({
 
   return result[0];
 };
+
+export const errorSummary = async ({
+  id,
+  userId,
+}: {
+  id: string;
+  userId: string;
+}): Promise<Summary | undefined> => {
+  const result = await db
+    .update(summary)
+    .set({ state: "error" })
+    .where(and(eq(summary.id, id), eq(summary.userId, userId)))
+    .returning();
+
+  return result[0];
+};

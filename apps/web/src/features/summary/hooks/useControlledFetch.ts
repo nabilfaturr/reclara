@@ -10,7 +10,7 @@ export function useControlledFetch<T = unknown>(
   url?: string,
   options: Options<T> = {}
 ) {
-  const { interval = 4000, autoStop } = options;
+  const { interval = 1500, autoStop } = options;
 
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(false);

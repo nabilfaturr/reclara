@@ -9,6 +9,6 @@ export const transcriptQueue = new Queue<TranscriptJobData>(
   { connection }
 );
 
-export const summaryQueue = new Queue("summary-queue", {
+export const summaryQueue = new Queue<TranscriptJobData>("summary-queue", {
   connection,
 });

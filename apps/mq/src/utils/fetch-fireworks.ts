@@ -2,7 +2,7 @@ import { config } from "dotenv";
 import { join } from "path";
 import { summarySchema } from "./fireworks-respons-schema";
 
-config({ path: join(process.cwd(), "server", ".env.local") });
+config({ path: join(import.meta.dir, "../../.env.local") });
 
 type FireworksModel = "deepseek-v3p1-terminus" | "gpt-oss-20b" | "gpt-oss-120b";
 

@@ -16,8 +16,8 @@ type MarkdownProps = {
 export default function Markdown({
   content,
   streaming = true,
-  streamSpeed = 3,
-  streamDelay = 25,
+  streamSpeed = 2,
+  streamDelay = 2,
 }: MarkdownProps) {
   const [displayedContent, setDisplayedContent] = useState("");
   const [isComplete, setIsComplete] = useState(false);
@@ -48,13 +48,10 @@ export default function Markdown({
   }, [content, streaming, streamSpeed, streamDelay]);
 
   return (
-    <div className="prose prose-neutral max-w-none dark:prose-invert overflow-y-auto pb-25">
+    <div className="prose prose-neutral max-w-none dark:prose-invert overflow-y-auto font-sans pt-10 pb-3 px-2">
       <ReactMarkdown remarkPlugins={[remarkGfm]}>
         {displayedContent}
       </ReactMarkdown>
-      {!isComplete && (
-        <span className="inline-block w-1 h-4 bg-current animate-pulse ml-1" />
-      )}
     </div>
   );
 }
