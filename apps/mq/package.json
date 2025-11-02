@@ -6,11 +6,12 @@
   "dependencies": {
     "@reclara/constants": "workspace:*",
     "@reclara/db": "workspace:*",
+    "@reclara/redis": "workspace:*",
     "@libsql/client": "^0.15.15",
     "bullmq": "^5.58.6",
     "dotenv": "^17.2.3",
     "drizzle-orm": "^0.44.6",
-    "redis": "^5.8.2"
+    "ioredis": "^5.8.2"
   },
   "peerDependencies": {
     "typescript": "^5"

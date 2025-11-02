@@ -17,16 +17,9 @@
     "esModuleInterop": true,
     "isolatedModules": true,
 
-    // Path aliases (extends base, override local)
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@reclara/db/*": ["../../packages/db/*"],
-      "@reclara/db": ["../../packages/db/index.ts"],
-      "@reclara/auth/*": ["../../packages/auth/*"],
-      "@reclara/utils/*": ["../../packages/utils/*"],
-      "@reclara/constants": ["../../packages/constants/index.ts"],
-      "@reclara/constants/*": ["../../packages/constants/*"]
+      "@/*": ["./src/*"]
     },
 
     // Best practices

@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "dotenv": "^17.2.3",
-    "drizzle-orm": "^0.44.7"
+    "drizzle-orm": "^0.44.7",
+    "ioredis": "^5.8.2"
   }
 }
