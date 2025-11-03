@@ -47,7 +47,7 @@ const transcriptWorker = new Worker<TranscriptJobData>(
       });
     }
   },
-  { connection }
+  { connection, concurrency: 5 }
 );
 
 transcriptWorker.on("completed", async (job, returnvalue) => {

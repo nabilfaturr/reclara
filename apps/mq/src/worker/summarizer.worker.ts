@@ -61,7 +61,7 @@ const worker = new Worker(
       });
     }
   },
-  { connection }
+  { connection, concurrency: 5 }
 );
 
 worker.on("completed", async (job, result) => {
