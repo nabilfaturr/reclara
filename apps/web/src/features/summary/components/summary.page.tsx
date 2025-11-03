@@ -9,40 +9,52 @@ import { SummaryResult } from "./summary.result";
 
 export function SummaryPage() {
   const [summary, setSummary] = React.useState<Summary | null>(null);
-  const hasStartedRef = React.useRef(false);
+  const [pollTrigger, setPollTrigger] = React.useState(0);
+  const stopRef = React.useRef<(() => void) | null>(null);
 
-  const { data, start } = useControlledFetch<Summary>(
+  const { data, start, stop } = useControlledFetch<Summary>(
     summary ? `/api/summary?id=${summary.id}` : undefined,
     {
       autoStop: (data) => data.state === "finished",
     }
   );
 
+  // store stop reference
+  React.useEffect(() => {
+    stopRef.current = stop;
+  }, [stop]);
+
   const [form, setForm] = React.useState({
     videoUrl: "",
     model: DEFAULT_LLM_MODEL,
   });
 
+  // Start polling ketika pollTrigger berubah (bukan hanya summary.id)
   React.useEffect(() => {
-    if (summary?.id && !hasStartedRef.current) {
-      console.log("🚀 Starting polling for summary:", summary.id);
-      hasStartedRef.current = true;
-      start();
+    if (summary?.id && pollTrigger > 0) {
+      // Force stop dulu sebelum start baru
+      stopRef.current?.();
+      // Delay slightly untuk ensure activeRef.current set to false
+      const timeout = setTimeout(() => {
+        start();
+      }, 50);
+      return () => clearTimeout(timeout);
     }
-  }, [summary?.id, start]);
+  }, [pollTrigger, summary?.id, start]);
 
   React.useEffect(() => {
-    if (data) {
+    if (data && summary?.id === data.id) {
       setSummary((prev: Summary | null) => {
         if (JSON.stringify(prev) === JSON.stringify(data)) return prev;
         return data;
       });
     }
-  }, [data]);
+  }, [data, summary?.id]);
 
+  // Reset summary ketika user submit form baru
   React.useEffect(() => {
     if (!summary?.id) {
-      hasStartedRef.current = false;
+      stopRef.current?.();
     }
   }, [summary?.id]);
 
@@ -50,10 +62,11 @@ export function SummaryPage() {
     <>
       <SummaryResult summary={summary} />
       <SummaryInput
-        start={start}
         form={form}
+        summary={summary}
         setSummary={setSummary}
         setForm={setForm}
+        onNewRequest={() => setPollTrigger((prev) => prev + 1)}
       />
     </>
   );

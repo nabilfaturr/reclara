@@ -3,12 +3,12 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ModelMenu } from "./model.menu";
 import { DEFAULT_LLM_MODEL } from "@reclara/constants";
-import { sendVideoURL } from "../actions";
-import { toast } from "sonner";
-import { formSchema } from "../validation";
 import { Summary } from "@reclara/db/schemas/summary.schema";
+import { toast } from "sonner";
+import { ModelMenu } from "./model.menu";
+import { formSchema } from "../validation";
+import { sendVideoURL } from "../actions";
 
 const placeholder = `Input Youtube video URL or ID here`;
 
@@ -23,15 +23,17 @@ type SummaryInputProps = {
       model: typeof DEFAULT_LLM_MODEL;
     }>
   >;
-  start: () => void;
+  summary: Summary | null;
   setSummary: React.Dispatch<React.SetStateAction<Summary | null>>;
+  onNewRequest: () => void;
 };
 
 export function SummaryInput({
   form,
   setForm,
-  start,
+  summary,
   setSummary,
+  onNewRequest,
 }: SummaryInputProps) {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
@@ -50,16 +52,29 @@ export function SummaryInput({
     formData.append("videoUrl", form.videoUrl);
     formData.append("model", form.model);
 
-    const summary = await sendVideoURL(formData);
+    const newSummary = await sendVideoURL(formData);
 
-    if (!summary) {
+    if (!newSummary) {
       return toast.error("Failed to process the video URL", {
         className: "mt-24",
       });
     }
 
-    setSummary(summary);
-    start();
+    setSummary(newSummary);
+    onNewRequest(); // Trigger polling restart via parent
+  };
+
+  const isDisabled = () => {
+    if (!summary) return false;
+
+    const disableStates: (typeof summary.state)[] = [
+      "pending",
+      "start_transcript",
+      "success_transcript",
+      "start_summarizing",
+    ];
+
+    return disableStates.includes(summary.state);
   };
 
   return (
@@ -88,7 +103,12 @@ export function SummaryInput({
             setForm={setForm}
             triggerClassName="w-fit font-sans"
           />
-          <Button className="cursor-pointer bottom" size="sm" type="submit">
+          <Button
+            className="cursor-pointer bottom"
+            size="sm"
+            type="submit"
+            disabled={isDisabled()}
+          >
             Summarize
           </Button>
         </div>

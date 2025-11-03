@@ -26,6 +26,14 @@ export function useControlledFetch<T = unknown>(
     autoStopRef.current = autoStop;
   }, [autoStop]);
 
+  // Reset data & active state ketika URL berubah
+  useEffect(() => {
+    setData(null);
+    setError(null);
+    activeRef.current = false;
+    setActive(false);
+  }, [url]);
+
   const fetchData = useCallback(async () => {
     if (!url || !activeRef.current) return;
 
@@ -56,7 +64,17 @@ export function useControlledFetch<T = unknown>(
   }, [url]);
 
   const start = useCallback(() => {
-    if (activeRef.current || !url) return;
+    if (!url) return;
+    // Allow re-starting even if already active (for retry scenarios)
+    if (activeRef.current) {
+      // Clear existing interval first
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+      setData(null); // Reset data for fresh start
+      setError(null);
+    }
     activeRef.current = true;
     setActive(true);
     fetchData();
@@ -69,7 +87,7 @@ export function useControlledFetch<T = unknown>(
       timerRef.current = null;
     }
     activeRef.current = false;
-      setActive(false);
+    setActive(false);
   }, []);
 
   useEffect(() => {
