@@ -1,8 +1,5 @@
-import { config } from "dotenv";
-import { join } from "path";
+import env from "@reclara/env";
 import { summarySchema } from "./fireworks-respons-schema";
-
-config({ path: join(import.meta.dir, "../../.env.local") });
 
 type FireworksModel = "deepseek-v3p1-terminus" | "gpt-oss-20b" | "gpt-oss-120b";
 
@@ -42,7 +39,7 @@ export async function fetchFireworks(
   prompt: string,
   options?: Partial<Omit<FireworksParams, "model" | "prompt">>
 ): Promise<FireworksResponse> {
-  const apiKey = process.env.FIREWORKS_API_KEY;
+  const apiKey = env.FIREWORKS_API_KEY;
 
   if (!apiKey) {
     throw new Error("FIREWORKS_API_KEY environment variable is not set");

@@ -4,6 +4,7 @@
   "main": "index.ts",
   "type": "module",
   "dependencies": {
-    "@reclara/constants": "workspace:*"
+    "@reclara/constants": "workspace:*",
+    "@reclara/env": "workspace:*"
   }
 }

@@ -7,6 +7,7 @@
     "@reclara/constants": "workspace:*",
     "@reclara/db": "workspace:*",
     "@reclara/redis": "workspace:*",
+    "@reclara/env": "workspace:*",
     "@libsql/client": "^0.15.15",
     "bullmq": "^5.58.6",
     "dotenv": "^17.2.3",

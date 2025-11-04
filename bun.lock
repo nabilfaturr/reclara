@@ -29,6 +29,7 @@
         "@libsql/client": "^0.15.15",
         "@reclara/constants": "workspace:*",
         "@reclara/db": "workspace:*",
+        "@reclara/env": "workspace:*",
         "@reclara/redis": "workspace:*",
         "bullmq": "^5.58.6",
         "dotenv": "^17.2.3",
@@ -83,6 +84,10 @@
       "dependencies": {
         "@reclara/constants": "workspace:*",
       },
+    },
+    "packages/env": {
+      "name": "@reclara/env",
+      "version": "1.0.0",
     },
     "packages/redis": {
       "name": "@reclara/redis",
@@ -450,6 +455,8 @@
     "@reclara/constants": ["@reclara/constants@workspace:packages/constants"],
 
     "@reclara/db": ["@reclara/db@workspace:packages/db"],
+
+    "@reclara/env": ["@reclara/env@workspace:packages/env"],
 
     "@reclara/redis": ["@reclara/redis@workspace:packages/redis"],
 
