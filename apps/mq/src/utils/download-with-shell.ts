@@ -1,5 +1,6 @@
 import { $ } from "bun";
 import path from "path";
+import fs from "fs/promises";
 import { delay, withRetry } from "./retry.js";
 
 export async function downloadWithShell(
@@ -48,22 +49,34 @@ export async function downloadWithShell(
     for (const lang of subtitleLangs) {
       if (hasDownloaded) break;
       try {
-        console.log(`  Trying ${lang}...`);
+        console.log(`  Trying auto-generated ${lang}...`);
+        
+        // Run yt-dlp with STRICT auto-subs only (no manual fallback)
         await withRetry(
           () =>
-            $`yt-dlp "${url}" --write-auto-subs --skip-download --sub-langs ${lang} --output "${outputTemplate}.%(ext)s"`.text(),
+            $`yt-dlp "${url}" --write-auto-subs --no-write-subs --skip-download --sub-langs ${lang} --output "${outputTemplate}.%(ext)s"`.text(),
           3
         );
-        downloadedSubs.push(lang);
-        hasDownloaded = true;
-        console.log(`  [SUCCESS] Auto ${lang} downloaded`);
-        await delay(500);
+        
+        // ✅ CRITICAL: Verify file exists immediately after download
+        const expectedFile = `${outputTemplate}.${lang}.vtt`;
+        try {
+          await fs.access(expectedFile);
+          downloadedSubs.push(lang);
+          hasDownloaded = true;
+          console.log(`  [SUCCESS] ✅ Auto-generated ${lang} downloaded & verified`);
+          await delay(500);
+        } catch (fileError) {
+          console.log(`  [WARNING] yt-dlp succeeded but file not found: ${expectedFile}`);
+          console.log(`  [INFO] Video likely has no auto-generated ${lang} subtitles, trying next...`);
+          // Continue to next language
+        }
       } catch (error: any) {
         const errorMsg = error.stderr?.toString() || "";
         if (errorMsg.includes("429")) {
           console.warn(`  [WARNING] Rate limited for ${lang}. Skipping...`);
         } else if (errorMsg.includes("Unable to download")) {
-          console.log(`  [WARNING] Auto ${lang} not available`);
+          console.log(`  [WARNING] Auto-generated ${lang} not available`);
         } else {
           throw error;
         }
@@ -73,13 +86,16 @@ export async function downloadWithShell(
 
     if (totalDownloaded === 0) {
       throw new Error(
-        "No subtitles found. Video may not have subtitles in requested languages."
+        "No auto-generated subtitles available. Video does not have auto-generated subtitles in requested languages (en, id). Manual subtitles are not supported."
       );
     }
 
+    const finalFile = `${outputTemplate}.${downloadedSubs[0]}.vtt`;
+    console.log(`[FINAL] Auto-generated subtitle file ready: ${finalFile}`);
+
     return {
       success: true,
-      location: outputTemplate + `.${downloadedSubs[0]}.vtt`,
+      location: finalFile,
     };
   } catch (error: any) {
     console.error("\n[ERROR] Download failed:", error.message);

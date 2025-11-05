@@ -34,7 +34,11 @@ const transcriptWorker = new Worker<TranscriptJobData>(
 
       const vttContent = await fs.readFile(location, "utf-8");
 
+      console.log(`[VTT CONTENT]`, vttContent.slice(0, 25), "...");
+
       const cleanedText = cleanSubtitle(vttContent);
+
+      console.log(`[CLEANED TEXT]`, cleanedText.slice(0, 25), "...");
 
       console.log("=== Transcript Worker Done ===");
 
@@ -45,29 +49,44 @@ const transcriptWorker = new Worker<TranscriptJobData>(
         id: job.data.id as string,
         userId: job.data.userId,
       });
+      throw error;
     }
   },
   { connection, concurrency: 5 }
 );
 
 transcriptWorker.on("completed", async (job, returnvalue) => {
-  const summary = await updateSummary({
-    id: job.data.id as string,
-    userId: job.data.userId,
-    videoId: job.data.videoId,
-    model: job.data.model,
-    transcript: returnvalue.cleanedText,
-    state: "success_transcript",
-  });
+  try {
+    if (!returnvalue?.cleanedText) {
+      console.error(
+        `[COMPLETED] Job ${job.id} completed but missing cleanedText. This should not happen.`
+      );
+      await updateErrorSummary({
+        id: job.data.id as string,
+        userId: job.data.userId,
+      });
+      return;
+    }
 
-  console.log(`[COMPLETED] Job ${job.id} completed.`);
+    const summary = await updateSummary({
+      id: job.data.id as string,
+      userId: job.data.userId,
+      videoId: job.data.videoId,
+      model: job.data.model,
+      transcript: returnvalue.cleanedText,
+      state: "success_transcript",
+    });
 
-  if (summary) return await summaryQueue.add("summary-queue", summary);
+    console.log(`[COMPLETED] Job ${job.id} completed.`);
 
-  await updateErrorSummary({
-    id: job.data.id as string,
-    userId: job.data.userId,
-  });
+    if (summary) return await summaryQueue.add("summary-queue", summary);
+  } catch (error) {
+    console.error(`Error in completed handler for job ${job.id}:`, error);
+    await updateErrorSummary({
+      id: job.data.id as string,
+      userId: job.data.userId,
+    });
+  }
 });
 
 transcriptWorker.on("failed", async (job, err) => {
