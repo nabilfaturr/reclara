@@ -83,6 +83,7 @@
       "version": "1.0.0",
       "dependencies": {
         "@reclara/constants": "workspace:*",
+        "@reclara/env": "workspace:*",
       },
     },
     "packages/env": {
@@ -94,6 +95,7 @@
       "version": "1.0.0",
       "dependencies": {
         "@reclara/db": "workspace:*",
+        "@reclara/env": "workspace:*",
       },
     },
   },

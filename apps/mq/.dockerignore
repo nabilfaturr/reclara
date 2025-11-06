@@ -1,0 +1,6 @@
+node_modules
+bun.lock
+.env.local
+*.log
+dist
+README.md

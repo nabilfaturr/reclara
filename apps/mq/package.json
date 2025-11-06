@@ -3,6 +3,10 @@
   "module": "index.ts",
   "type": "module",
   "private": true,
+  "scripts": {
+    "start:transcripter": "bun run src/worker/transcripter.worker.ts",
+    "start:summarizer": "bun run src/worker/summarizer.worker.ts"
+  },
   "dependencies": {
     "@reclara/constants": "workspace:*",
     "@reclara/db": "workspace:*",

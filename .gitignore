@@ -1,6 +1,6 @@
 a# dependencies (bun install)
 node_modules
-
+.env.docker
 # output
 out
 dist
