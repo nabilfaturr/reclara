@@ -39,3 +39,6 @@ apps/web/.turbo/turbo-dev.log
 docs/
 .vscode/
 /downloads
+apps/mq/src/youtube.com-cookies.txt
+apps/mq/youtube.com-cookies.txt
+CICD_SETUP_GUIDE.md
