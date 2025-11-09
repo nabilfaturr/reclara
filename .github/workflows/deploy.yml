@@ -58,6 +58,12 @@ jobs:
           key: ${{ secrets.VM_SSH_KEY }}
           script: |
             cd /app/reclara
+
+            # Ensure .env file exists for docker-compose
+            if [ ! -f .env ]; then
+              cp .env.docker .env
+            fi
+
             echo "Logging in to Docker registry..."
             echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} --password-stdin
 
