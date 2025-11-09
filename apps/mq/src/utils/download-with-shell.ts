@@ -50,25 +50,31 @@ export async function downloadWithShell(
       if (hasDownloaded) break;
       try {
         console.log(`  Trying auto-generated ${lang}...`);
-        
+
         // Run yt-dlp with STRICT auto-subs only (no manual fallback)
         await withRetry(
           () =>
-            $`yt-dlp "${url}" --write-auto-subs --no-write-subs --skip-download --sub-langs ${lang} --output "${outputTemplate}.%(ext)s"`.text(),
+            $`yt-dlp "${url}" --cookies /app/apps/mq/youtube.com-cookies.txt --write-auto-subs --no-write-subs --skip-download --sub-langs ${lang} --output "${outputTemplate}.%(ext)s"`.text(),
           3
         );
-        
+
         // ✅ CRITICAL: Verify file exists immediately after download
         const expectedFile = `${outputTemplate}.${lang}.vtt`;
         try {
           await fs.access(expectedFile);
           downloadedSubs.push(lang);
           hasDownloaded = true;
-          console.log(`  [SUCCESS] ✅ Auto-generated ${lang} downloaded & verified`);
+          console.log(
+            `  [SUCCESS] ✅ Auto-generated ${lang} downloaded & verified`
+          );
           await delay(500);
         } catch (fileError) {
-          console.log(`  [WARNING] yt-dlp succeeded but file not found: ${expectedFile}`);
-          console.log(`  [INFO] Video likely has no auto-generated ${lang} subtitles, trying next...`);
+          console.log(
+            `  [WARNING] yt-dlp succeeded but file not found: ${expectedFile}`
+          );
+          console.log(
+            `  [INFO] Video likely has no auto-generated ${lang} subtitles, trying next...`
+          );
           // Continue to next language
         }
       } catch (error: any) {
