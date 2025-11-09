@@ -11,7 +11,10 @@ services:
     restart: always
 
   transcripter:
-    image: ghcr.io/nabilfaturr/reclara/mq:latest
+    image: ${MQ_IMAGE:-ghcr.io/nabilfaturr/reclara/mq:latest}
+    build:
+      context: .
+      dockerfile: ./apps/mq/Dockerfile
     working_dir: /app/apps/mq
     command: ["bun", "run", "start:transcripter"]
     depends_on:
@@ -21,7 +24,10 @@ services:
     restart: always
 
   summarizer:
-    image: ghcr.io/nabilfaturr/reclara/mq:latest
+    image: ${MQ_IMAGE:-ghcr.io/nabilfaturr/reclara/mq:latest}
+    build:
+      context: .
+      dockerfile: ./apps/mq/Dockerfile
     working_dir: /app/apps/mq
     command: ["bun", "run", "start:summarizer"]
     depends_on:

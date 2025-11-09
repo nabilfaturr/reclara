@@ -74,7 +74,7 @@ jobs:
             docker compose down
 
             echo "Starting new containers..."
-            docker compose up -d
+            MQ_IMAGE=ghcr.io/nabilfaturr/reclara/mq:latest docker compose up -d
 
             echo "Deployment successful!"
             docker compose ps
