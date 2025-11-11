@@ -16,8 +16,8 @@ const ErrorState = ({ message }: { message: string }) => (
 
 const NoSummary = () => (
   <div className="relative text-center top-95">
-    <p className="font-vt323 text-6xl font-semibold text-center">
-      Lets create a summary!
+    <p className="font-vt323 text-5xl font-semibold text-center">
+      Lets create a summary from any youtube videos!
     </p>
   </div>
 );

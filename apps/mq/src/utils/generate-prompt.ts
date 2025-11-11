@@ -1,25 +1,25 @@
 export function generatePrompt(videoTranscript: string) {
   return `
-Kamu adalah sistem peringkas video YouTube yang menghasilkan output dalam format JSON.
-Hasil akhirnya HARUS berupa JSON valid dengan satu field bernama "content",
-yang berisi teks dalam format **Markdown** seperti di bawah ini.
+You are a YouTube video summarization system that generates output in JSON format.
+The final result MUST be valid JSON with a single field named "content",
+which contains text in **Markdown** format as shown below.
 
-Format Markdown di dalam field "content" harus mengikuti struktur berikut:
+The Markdown format within the "content" field must follow this structure:
 
-# Ringkasan Video
-Paragraf pembuka (1–3 paragraf) yang menjelaskan isi utama video.
+# Video Summary
+Opening paragraph (1–3 paragraphs) that explains the main content of the video.
 
-## Poin Utama
-- (Gunakan bullet point untuk poin-poin penting)
-- (3–6 poin)
+## Key Points
+- (Use bullet points for important points)
+- (3–6 points)
 
-## Kesimpulan
-Paragraf penutup yang merangkum inti pesan video.
+## Conclusion
+Closing paragraph that summarizes the core message of the video.
 
-Gunakan bahasa Indonesia yang alami, jelas, dan tidak terlalu formal.
-Jangan tambahkan teks di luar JSON. Pastikan output adalah JSON valid.
+Use natural, clear, and professional English.
+Do not add any text outside of JSON. Ensure the output is valid JSON.
 
-Transkrip Video:
+Video Transcript:
 ${videoTranscript}
 `;
 }
