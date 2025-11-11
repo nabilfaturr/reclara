@@ -4,8 +4,9 @@ YouTube video summarization system with automatic transcription and AI-powered s
 
 ## Demo
 
-[![Reclara Demo](https://img.youtube.com/vi/K1iApz-vKyU/0.jpg)](https://www.youtube.com/watch?v=K1iApz-vKyU)
+![Reclara Demo](./demo.gif)
 
+Or view on [YouTube](https://www.youtube.com/watch?v=K1iApz-vKyU)
 
 ## Getting Started
 
